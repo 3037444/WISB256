@@ -37,7 +37,7 @@ T2 = time.perf_counter()
 
 T = T2 - T1
 
-bestand = open('prime.dat', 'w')
+bestand = open(file, 'w')
 for number in lijst:
     bestand.write(str(number) + "\n")
 
