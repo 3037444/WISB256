@@ -22,7 +22,7 @@ def priemtest(integer):
             i = i + 1
         else:
             n  =  i + (2*i +3)
-            while n <= lengte:
+            while n < lengte:
                 lijst[n] = False
                 n = n + (2*i + 3)
             i = i +1
