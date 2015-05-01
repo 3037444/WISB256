@@ -10,28 +10,32 @@ def priemgetallen(integer):
     lijst=[]
     for i in range(N+1):
         lijst.append(i)
-    del lijst[0]
-    del lijst[0]
     return lijst
 
 def priemtest(integer, lijst):
-    i = 0
-    n = 2
+    i = 2
+    j = 4
+    lijst2 = []
+    
     while i < len(lijst):
-        j = n * lijst[i]
-        if j <= integer:
-            if j in lijst:
-                lijst.remove(j)
-                n = n + 1
-            else:
-                n = n + 1
-        if j > integer:
+        if lijst[i]!=0:
+            if j <= integer:
+                lijst[j]=0
+                j = j + i
+            if j > integer:
+                i = i + 1
+                j = 2*1
+        else:
             i = i + 1
-            n = 2
-    return lijst
+            
+    for i in range(len(lijst)-1):
+        if lijst[i] != 0:
+            lijst2.append(lijst[i])
+    return lijst2
 
 lijst = priemgetallen(N)
 lijst = priemtest(N, lijst)
+print(lijst)
 
 T2 = time.perf_counter()
 
