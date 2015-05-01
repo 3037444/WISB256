@@ -8,39 +8,44 @@ T1 = time.perf_counter()
 
 def priemgetallen(integer):
     lijst=[]
-    for i in range(N+1):
-        lijst.append(i)
-    del lijst[0]
-    del lijst[0]
+    lengte = int((N+(N%2))/2-1)
+    for i in range(lengte):
+        lijst.append(True)
     return lijst
 
-def priemtest(integer, lijst):
+def priemtest(integer):
+    lijst = priemgetallen(integer)
+    lengte = len(lijst)
     i = 0
-    n = 2
-    while i < len(lijst):
-        j = n * lijst[i]
-        if j <= integer:
-            if j in lijst:
-                lijst.remove(j)
-                n = n + 1
-            else:
-                n = n + 1
-        if j > integer:
+    while i**2 < lengte:
+        if lijst[i] == False:
             i = i + 1
-            n = 2
+        else:
+            n  =  i + (2*i +3)
+            while n <= lengte:
+                lijst[n] = False
+                n = n + (2*i + 3)
+            i = i +1
     return lijst
 
-lijst = priemgetallen(N)
-lijst = priemtest(N, lijst)
+def Bool_naar_int(lijst):
+    deflijst= [2]
+    for i in range(len(lijst)):
+        if lijst[i] == True:
+            deflijst.append(2*i+3)
+    return deflijst
+    
+lijst = priemtest(N)
+lijst = Bool_naar_int(lijst)
 
 T2 = time.perf_counter()
 
 T = T2 - T1
 
-bestand = open('prime.dat', 'w')
+bestand = open(file, 'w')
 for number in lijst:
     bestand.write(str(number) + "\n")
 
 bestand.close()
-
+    
 print("Found {:d} Prime numbers smaller than {:d} in {:0.15f} sec".format(len(lijst), N, T)) 
