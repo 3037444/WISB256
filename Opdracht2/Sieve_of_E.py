@@ -12,30 +12,36 @@ def priemgetallen(integer):
         lijst.append(i)
     return lijst
 
-def priemtest(integer, lijst):
+def priemtest(integer):
+    lijst = priemgetallen(integer)
+    lijst[0] = 0
+    lijst[1] = 0
     i = 2
-    j = 4
-    lijst2 = []
-    
     while i < len(lijst):
-        if lijst[i]!=0:
-            if j <= integer:
-                lijst[j]=0
-                j = j + i
-            if j > integer:
-                i = i + 1
-                j = 2*1
+        if lijst[i] == 0:
+            i = i +1
         else:
-            i = i + 1
-            
-    for i in range(len(lijst)-1):
-        if lijst[i] != 0:
-            lijst2.append(lijst[i])
-    return lijst2
+            j = i + i
+            while j < len(lijst):
+                lijst[j] = 0
+                j = j + i
+            if j >= len(lijst):
+                i = i + 1
+    return lijst
 
-lijst = priemgetallen(N)
-lijst = priemtest(N, lijst)
-print(lijst)
+def lijstopschonen(lijst):
+    schonelijst = []
+    i = 0
+    while i < len(lijst):
+        if lijst[i] != 0:
+            schonelijst.append(lijst[i])
+            i = i + 1
+        else:
+            i = i +1
+    return schonelijst
+    
+lijst = priemtest(N)
+lijst = lijstopschonen(lijst)
 
 T2 = time.perf_counter()
 
