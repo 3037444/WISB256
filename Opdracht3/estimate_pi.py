@@ -5,10 +5,6 @@ import math
 try:
     N = int(sys.argv[1])
     L = float(sys.argv[2])
-    assert (L <= 1)
-except AssertionError:
-    print("L should be smaller than 1")
-    exit(1)
 except:
     print("Use: estimate_pi.py N L")
     exit(1)
@@ -38,6 +34,14 @@ while n < N:
         h = h +1
     n = n+1
 
-x = (2*n*L)/h
-print("{:d} hits in {:d} tries".format(h, n) + "\n"
-+ "Pi = " + str(x))
+if L <= 1:
+    x = (2*n*L)/h
+    print("{:d} hits in {:d} tries".format(h, n) + "\n"
+    + "Pi = " + str(x))
+else:
+    invers = math.asin(L**(-1))
+    teller = 2*(L -  math.sqrt(L**2 -1) - invers)
+    noemer = h/n -1
+    x = teller/noemer
+    print("{:d} hits in {:d} tries".format(h, n) + "\n"
+    + "Pi = " + str(x))
