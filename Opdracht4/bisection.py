@@ -32,6 +32,8 @@ def findRoots(f, a, b, epsilon):
     
 def findAllRoots(f, a, b, epsilon):
     n = math.fabs(b-a)/epsilon
+    if n > 10**5:
+        n = 10**5
     lijst = []
     i = 0
     while i < n:
