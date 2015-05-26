@@ -34,6 +34,7 @@ def findAllRoots(f, a, b, epsilon):
     n = math.fabs(b-a)/epsilon
     if n > 10**5:
         n = 10**5
+        epsilon = math.fabs(b-a) / n
     lijst = []
     i = 0
     while i < n:
@@ -41,7 +42,6 @@ def findAllRoots(f, a, b, epsilon):
         d = a + (i+1) * epsilon
         if f(c)*f(d) < 0:
             root = float(findRoots(f,c,d, epsilon))
-            print(root)
             lijst.append(root)
         i = i +1
     return lijst
