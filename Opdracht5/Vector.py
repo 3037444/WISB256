@@ -51,3 +51,27 @@ class Vector(object):
         temp = self.inner(self)
         temp = math.sqrt(temp)
         return temp
+        
+    def project(self, other):
+        teller = self.inner(other)
+        noemer = self.inner(self)
+        breuk = teller/noemer
+        temp = self.scalar(breuk)
+        return temp
+    
+    def normaliseer(self):
+        factor = self.norm()
+        factor = 1/ factor
+        temp = self.scalar(factor)
+        return temp
+
+def GrammSchmidt(self):
+    temp = self
+    for i in range(len(self)):
+        j = i -1
+        while j >= 0:
+            verschil = temp[j].project(temp[i])
+            temp[i] = temp[i].lincomb(verschil, 1, -1)
+            j = j -1
+        temp[i] = temp[i].normaliseer()
+    return temp
