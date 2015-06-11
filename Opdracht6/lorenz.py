@@ -3,8 +3,8 @@ import numpy as NP
 from scipy import *
 from Vector import *
 from scipy.integrate import odeint
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+#import matplotlib.pyplot as plt
+#from mpl_toolkits.mplot3d import Axes3D
 
 class Lorenz(object):
 
@@ -32,3 +32,20 @@ class Lorenz(object):
             t.append(i*dt)
         opl = odeint(self.f, self.plaats, t)
         return opl
+    
+    def df(self):
+        p = self.f
+        J = NP.array[(-self.sigma, self.sigma, 0),(self.rho-p[2], -1, -p[0]),(p[1],p[0],-self.beta)]
+        return J
+    
+    def isStable(self):
+        J = self.df
+        EV = NP.linalg.eigh(J)
+        i = 0
+        while i < len(EV):
+            if EV[i] < 0:
+                i = i + 1
+            else:
+                return False
+        return True
+        
