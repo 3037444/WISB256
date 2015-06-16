@@ -14,7 +14,7 @@ class Lorenz(object):
         self.rho = rho
         self.beta = beta
     
-    def f(self, vector,t):
+    def f(self, vector, t):
         x = vector[0]
         y = vector[1]
         z = vector[2]
@@ -33,13 +33,13 @@ class Lorenz(object):
         opl = odeint(self.f, self.plaats, t)
         return opl
     
-    def df(self):
-        p = self.f
+    def df(self, vector):
+        p = vector
         J = NP.array[(-self.sigma, self.sigma, 0),(self.rho-p[2], -1, -p[0]),(p[1],p[0],-self.beta)]
         return J
     
-    def isStable(self):
-        J = self.df
+    def isStable(self, vector):
+        J = self.df(vector)
         EV = NP.linalg.eigh(J)
         i = 0
         while i < len(EV):
